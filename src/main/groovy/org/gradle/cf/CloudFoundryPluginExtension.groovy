@@ -14,9 +14,6 @@
  */
 
 package org.gradle.cf
-
-import org.cloudfoundry.client.lib.CloudApplication
-
 /**
  * Configuration for the Cloud Foundry plugin.
  * 
@@ -30,7 +27,7 @@ class CloudFoundryPluginExtension {
     
     // application configuration
     String application
-    String framework = CloudApplication.SPRING
+    String framework = 'spring'
     String applicationFramework
     String runtime
     String command

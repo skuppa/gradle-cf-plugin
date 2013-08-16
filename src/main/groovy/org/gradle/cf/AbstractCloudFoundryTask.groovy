@@ -15,6 +15,7 @@
 
 package org.gradle.cf
 
+import org.cloudfoundry.client.lib.CloudCredentials
 import org.cloudfoundry.client.lib.CloudFoundryClient
 import org.cloudfoundry.client.lib.CloudFoundryException
 import org.gradle.api.DefaultTask
@@ -39,17 +40,19 @@ abstract class AbstractCloudFoundryTask extends DefaultTask {
     }
 
     protected void connectToCloudFoundry() {
-        log "Connecting to '${getTarget()}' with user '${getUsername()}'"
+        log "Connecting... to '${getTarget()}' with user '${getUsername()}'"
         CloudFoundryClient localClient = null
 
         try {
-            localClient = new CloudFoundryClient(getUsername(), getPassword(), getTarget())
+            localClient = new CloudFoundryClient(new CloudCredentials(getUsername(), getPassword()), new URL(getTarget()))
         } catch (MalformedURLException e) {
             throw new GradleException("Incorrect Cloud Foundry target url, are you sure '${getTarget()}' is correct? Make sure the url contains a scheme, e.g. http://...", e)
         }
 
         try {
+            log "Authenticated: ${localClient.cloudInfo}"
             localClient.login()
+            log "Authenticated: ${localClient.cloudInfo}"
         } catch (CloudFoundryException e) {
             if (HttpStatus.FORBIDDEN == e.statusCode) {
                 throw new GroovyRuntimeException("Login failed to '${getTarget()}' using username '${getUsername()}'. Please verify your login credentials.", e)

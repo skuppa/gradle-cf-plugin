@@ -15,10 +15,8 @@
 
 package org.gradle.cf
 
-import org.cloudfoundry.client.lib.CloudApplication
+import org.cloudfoundry.client.lib.domain.CloudInfo
 import org.gradle.api.GradleException
-import org.cloudfoundry.client.lib.CloudInfo
-
 /**
  * Base class for tasks related to the createApplication API.
  *
@@ -34,7 +32,7 @@ abstract class AbstractCreateApplicationCloudFoundryTask extends AbstractCloudFo
     String command
     int memory
     List<String> uris
-    List<String> services
+    List<String> cfServices
     File file
     Map<String, String> envers
 

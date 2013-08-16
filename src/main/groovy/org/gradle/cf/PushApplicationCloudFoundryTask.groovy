@@ -19,7 +19,7 @@ import org.gradle.api.tasks.TaskAction
 import org.springframework.http.HttpStatus
 import org.cloudfoundry.client.lib.CloudFoundryException
 import org.gradle.api.GradleException
-import org.cloudfoundry.client.lib.Staging
+import org.cloudfoundry.client.lib.domain.Staging
 
 /**
  * Tasks used to push an application on the CloudFoundry cloud.
@@ -59,10 +59,10 @@ class PushApplicationCloudFoundryTask extends AbstractCreateApplicationCloudFoun
                 def staging = new Staging(getApplicationFramework()?:'standalone')
                 staging.runtime = getRuntime()
                 staging.command = getCommand()
-                client.createApplication(getApplication(), staging, getMemory(), getUris(), getServices())
+                client.createApplication(getApplication(), staging, getMemory(), getUris(), getCfServices())
             } else {
                 log "Creating application '${getApplication()}'"
-                client.createApplication(getApplication(), getFramework(), getMemory(), getUris(), getServices())
+                client.createApplication(getApplication(), getFramework(), getMemory(), getUris(), getCfServices())
             }
 
             if (getEnvers()) {

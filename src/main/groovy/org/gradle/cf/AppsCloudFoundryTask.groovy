@@ -20,7 +20,7 @@
 package org.gradle.cf
 
 import org.gradle.api.tasks.TaskAction
-import org.cloudfoundry.client.lib.CloudApplication
+import org.cloudfoundry.client.lib.domain.CloudApplication
 
 /**
  * Task which lists applications deployed on CloudFoundry.

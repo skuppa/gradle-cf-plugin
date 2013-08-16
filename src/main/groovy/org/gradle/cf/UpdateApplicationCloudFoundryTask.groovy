@@ -21,7 +21,7 @@ import org.cloudfoundry.client.lib.CloudFoundryException
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.TaskAction
 import org.springframework.http.HttpStatus
-import org.cloudfoundry.client.lib.CloudApplication
+import org.cloudfoundry.client.lib.domain.CloudApplication
 
 /**
  * Tasks used to update an application on the CloudFoundry cloud.

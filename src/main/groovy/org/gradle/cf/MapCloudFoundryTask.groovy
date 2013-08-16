@@ -15,7 +15,6 @@
 
 package org.gradle.cf
 
-import org.cloudfoundry.client.lib.CloudApplication
 import org.gradle.api.tasks.TaskAction
 /**
  * A Basic task which can be used to map the application to the url on CloudFoundry platform.

@@ -18,8 +18,8 @@
 package org.gradle.cf
 
 import org.gradle.api.tasks.TaskAction
-import org.cloudfoundry.client.lib.CloudInfo
-import org.cloudfoundry.client.lib.ServiceConfiguration
+import org.cloudfoundry.client.lib.domain.CloudInfo
+import org.cloudfoundry.client.lib.domain.CloudServiceOffering
 
 /**
  * A basic task which can be used to get info from CloudFoundry platform.
@@ -35,23 +35,16 @@ class InfoCloudFoundryTask extends AbstractCloudFoundryTask {
     void info() {
         connectToCloudFoundry()
         CloudInfo info = client?.cloudInfo
-        List<ServiceConfiguration> configurations = client?.serviceConfigurations
+        List<CloudServiceOffering> configurations = client?.serviceOfferings
         log """Platform name: $info.name
 Platform version: $info.version build $info.build
 Debug ${info.allowDebug?'on':'off'}
 Support: $info.support
 Platform description: $info.description
 
-Available runtimes:
-   ${ info.runtimes.collect { CloudInfo.Runtime f-> "$f.name $f.version"}.join('\n   ') }
-
-Available services:
-   ${ info.frameworks.collect { CloudInfo.Framework f-> 
-            "${f.name} (${f.runtimes.collect { CloudInfo.Runtime rt -> rt.version}.join(", ")})"}.join('\n   ')
-        }
 
 Service configurations:
-   ${configurations.collect { ServiceConfiguration it ->
+   ${configurations.collect { CloudServiceOffering it ->
             "   Vendor: ${it.vendor.padRight(16)} Type: ${it.type.padRight(16)} Version: ${it.version.padRight(6)} Desc.: $it.description"
         }.join('\n   ')}
 

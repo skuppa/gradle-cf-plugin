@@ -18,7 +18,7 @@
 package org.gradle.cf
 
 import org.gradle.api.tasks.TaskAction
-import org.cloudfoundry.client.lib.CloudApplication
+import org.cloudfoundry.client.lib.domain.CloudApplication
 
 /**
  * A basic task which can be used to check the status of an application.

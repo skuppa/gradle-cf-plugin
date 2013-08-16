@@ -17,7 +17,7 @@
 
 package org.gradle.cf
 
-import org.cloudfoundry.client.lib.CloudApplication
+import org.cloudfoundry.client.lib.domain.CloudApplication
 import org.gradle.api.tasks.TaskAction
 
 /**

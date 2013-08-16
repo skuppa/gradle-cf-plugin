@@ -16,8 +16,8 @@
 package org.gradle.cf
 
 import org.gradle.api.tasks.TaskAction
-import org.cloudfoundry.client.lib.CloudService
-import org.cloudfoundry.client.lib.ServiceConfiguration
+import org.cloudfoundry.client.lib.domain.CloudService
+import org.cloudfoundry.client.lib.domain.CloudServiceOffering
 import org.gradle.api.GradleException
 
 /**
@@ -43,8 +43,8 @@ class AddServiceCloudFoundryTask extends AbstractCloudFoundryTask {
     void addService() {
         connectToCloudFoundry()
         if (client) {
-            List<ServiceConfiguration> configs = client.serviceConfigurations
-            ServiceConfiguration config = configs.find {
+            List<CloudServiceOffering> configs = client.serviceOfferings
+          CloudServiceOffering config = configs.find {
                 it.vendor == getVendor()
             }
             if (!config) {
