@@ -36,24 +36,25 @@ Gradle project.
 
 ```
 buildscript {
-       repositories {
-   	     mavenCentral()
-       }
-       dependencies {
-           classpath group: 'org.gradle.api.plugins', name: 'gradle-cf-plugin', version: '0.1.0-SNAPSHOT'
-       }
-   }
+  repositories {
+    mavenRepo url:'http://repo.springsource.org/repo/'
+    mavenCentral()
+  }
+  dependencies {
+    classpath ('org.gradle.api.plugins:gradle-cf-plugin:0.2.0')
+  }
+}
 
-   apply plugin: 'cloudfoundry'
+apply plugin: 'cloudfoundry'
 
-   cloudfoundry {
-      username = 'login@domain.foo'
-      password = 's3cr3t'
-      application = 'appName'
-      framework = 'grails'
-      file = new File('/path/to/app.war')
-      uris = ['http://appName.cloudfoundry.com']
-   }
+cloudfoundry {
+  username = 'login@domain.foo'
+  password = 's3cr3t'
+  application = 'appName'
+  framework = 'grails'
+  file = new File('/path/to/app.war')
+  uris = ['http://appName.cloudfoundry.com']
+}
 ```
 
 Then usage is simple:
